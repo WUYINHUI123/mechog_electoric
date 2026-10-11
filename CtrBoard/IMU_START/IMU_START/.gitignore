@@ -1,0 +1,39 @@
+# STM32 CubeMX / MDK-ARM build outputs
+MDK-ARM/RTE/
+MDK-ARM/DebugConfig/
+MDK-ARM/CtrBoard/
+MDK-ARM/Listings/
+MDK-ARM/Objects/
+*.uvoptx
+*.mxproject
+*.uvguix.*
+
+# Compiled / linker output
+*.o
+*.d
+*.crf
+*.lst
+*.hex
+*.bin
+*.axf
+*.elf
+*.map
+*.lnp
+*.dep
+*.htm
+*.build_log.htm
+
+# Editor / IDE
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# ZIP files
+*.zip
+*.rar

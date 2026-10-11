@@ -1,0 +1,25 @@
+本工程已按达妙 DM-H6215 速度模式进行修改。
+
+关键修改：
+1. 四个轮毂电机 ID 保持：0x09、0x10、0x11、0x12。
+2. 电机控制改为速度模式帧：CAN_ID = 0x200 + 电机ID。
+3. 主循环改为每 5ms 周期性发送四个电机速度指令。
+4. 默认测试速度为 10 rpm，在 Core/Src/main.c 中修改 WHEEL_TEST_SPEED_RPM 即可改变。
+5. 加入速度斜坡 WHEEL_RAMP_STEP_RPM，避免速度突变导致转动不流畅。
+6. 0x11 电机默认方向修正为 -1；如果方向不对，修改 WheelMotorDir 数组即可。
+7. FDCAN 修改为 1 Mbps：Prescaler=2, Seg1=18, Seg2=5, SJW=5。
+8. FDCAN AutoRetransmission 已开启。
+9. Motor.c 中加入发送 FIFO 等待，降低四电机连续发帧时丢帧概率。
+
+烧录测试前必须：
+1. 确认四个电机已经在上位机设置为 Vel Mode / 速度模式，并保存参数。
+2. 确认电机 CAN 波特率为 1 Mbps。
+3. 确认四个 ID 真的是十六进制 0x09、0x10、0x11、0x12。
+4. 把车架架空，四个轮子离地，再上电测试。
+
+常用修改位置：
+- Core/Src/main.c
+  - WHEEL_TEST_SPEED_RPM：默认测试速度
+  - WHEEL_RAMP_STEP_RPM：速度缓启动斜坡
+  - WheelMotorDir：四个电机方向修正
+
